@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native';
 import colors from '../misc/colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Note = ({ item, onPress }) => {
+  const [user, setUser] = useState({});
+  const findUser = async () => {
+    const result = await AsyncStorage.getItem('user');
+    setUser(JSON.parse(result));
+  };
+
+  useEffect(() => {
+    findUser();
+  }, []);
+
   const { title, desc } = item;
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
@@ -12,7 +23,7 @@ const Note = ({ item, onPress }) => {
       <Text style={styles.desc} numberOfLines={3}>
         {desc}
       </Text>
-      <Text style={styles.credit}>leduyuit</Text>
+      <Text style={styles.credit}>{user.name}</Text>
     </TouchableOpacity>
   );
 };
@@ -29,7 +40,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
     color: colors.LIGHT,
     marginBottom: 10,
   },
@@ -44,7 +55,9 @@ const styles = StyleSheet.create({
     fontSize: 10,
     position: 'absolute',
     bottom: 0,
-    left: 10,
+    right: 6,
+    paddingBottom: 6,
+    alignSelf: 'flex-end',
   },
 });
 
