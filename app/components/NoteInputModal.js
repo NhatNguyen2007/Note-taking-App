@@ -67,7 +67,7 @@ const NoteInputModal = ({ visible, onClose, onSubmit, note, isEdit }) => {
             value={desc}
             multiline
             placeholder='Note'
-            style={[styles.input, styles.desc]}
+            style={[styles.inputDesc, styles.desc]}
             onChangeText={text => handleOnChangeText(text, 'desc')}
           />
           <View style={styles.btnContainer}>
@@ -98,20 +98,30 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 15,
+    flex: 0.5,
+    // backgroundColor: 'red',
+  },
+  inputDesc: {
+    borderBottomWidth: 2,
+    borderBottomColor: colors.PRIMARY,
+    fontSize: 20,
+    color: colors.DARK,
+    flex: 0.7,
   },
   input: {
     borderBottomWidth: 2,
     borderBottomColor: colors.PRIMARY,
     fontSize: 20,
     color: colors.DARK,
+    flex: 0.3,
   },
   title: {
     height: 40,
-    marginBottom: 15,
+    // marginBottom: 15,
     fontWeight: 'bold',
   },
   desc: {
-    height: 100,
+    // height: 100,
   },
   modalBG: {
     flex: 1,
