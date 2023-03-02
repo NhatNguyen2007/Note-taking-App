@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native';
 import colors from '../misc/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import HTMLView from "react-native-htmlview";
 
 const Note = ({ item, onPress }) => {
   const [user, setUser] = useState({});
@@ -20,9 +21,10 @@ const Note = ({ item, onPress }) => {
       <Text style={styles.title} numberOfLines={2}>
         {title}
       </Text>
-      <Text style={styles.desc} numberOfLines={3}>
+      {/* <Text style={styles.desc} numberOfLines={3}>
         {desc}
-      </Text>
+      </Text> */}
+      <HTMLView value={desc} stylesheet={styles}/>
       <Text style={styles.credit}>{user.name}</Text>
     </TouchableOpacity>
   );
@@ -46,7 +48,6 @@ const styles = StyleSheet.create({
   },
   desc: {
     color: colors.LIGHT,
-    fontSize: 14,
     lineHeight: 20,
     marginBottom: 10,
   },
@@ -54,10 +55,15 @@ const styles = StyleSheet.create({
     color: colors.LIGHT,
     fontSize: 10,
     position: 'absolute',
-    bottom: 0,
+    top: 0,
     right: 6,
-    paddingBottom: 6,
+    paddingTop: 6,
     alignSelf: 'flex-end',
+  },
+  div: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: 'white',
   },
 });
 

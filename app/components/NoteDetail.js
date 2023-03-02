@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   desc: {
-    // fontSize: 20,
     opacity: 0.7,
   },
   time: {
