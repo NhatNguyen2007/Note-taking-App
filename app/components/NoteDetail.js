@@ -6,6 +6,7 @@ import RoundIconBtn from './RoundIconBtn';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNotes } from '../contexts/NoteProvider';
 import NoteInputModal from './NoteInputModal';
+import HTMLView from "react-native-htmlview";
 
 const formatDate = ms => {
   const date = new Date(ms);
@@ -95,7 +96,8 @@ const NoteDetail = props => {
             : `Created At ${formatDate(note.time)}`}
         </Text>
         <Text style={styles.title}>{note.title}</Text>
-        <Text style={styles.desc}>{note.desc}</Text>
+        {/* <Text style={styles.desc}>{note.desc}</Text> */}
+        <HTMLView value={note.desc} stylesheet={styles}/>
       </ScrollView>
       <View style={styles.btnContainer}>
         <RoundIconBtn
@@ -117,6 +119,10 @@ const NoteDetail = props => {
 };
 
 const styles = StyleSheet.create({
+  div: {
+    fontSize: 20,
+  },
+
   container: {
     // flex: 1,
     paddingHorizontal: 15,
@@ -127,8 +133,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   desc: {
-    fontSize: 20,
-    opacity: 0.6,
+    // fontSize: 20,
+    opacity: 0.7,
   },
   time: {
     textAlign: 'right',
