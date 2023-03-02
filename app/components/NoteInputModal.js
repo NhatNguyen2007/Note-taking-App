@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -11,8 +11,16 @@ import {
 } from 'react-native';
 import colors from '../misc/colors';
 import RoundIconBtn from './RoundIconBtn';
+import {
+  actions,
+  RichEditor,
+  RichToolbar,
+} from "react-native-pell-rich-editor";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const NoteInputModal = ({ visible, onClose, onSubmit, note, isEdit }) => {
+  const richText = useRef();
+
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const handleModalClose = () => {
@@ -63,13 +71,48 @@ const NoteInputModal = ({ visible, onClose, onSubmit, note, isEdit }) => {
             placeholder='Title'
             style={[styles.input, styles.title]}
           />
-          <TextInput
-            value={desc}
-            multiline
-            placeholder='Note'
-            style={[styles.inputDesc, styles.desc]}
-            onChangeText={text => handleOnChangeText(text, 'desc')}
-          />
+
+          <View style={[styles.richTextContainer]}>
+            {/* <TextInput
+              value={desc}
+              multiline
+              placeholder='Note'
+              style={[styles.inputDesc, styles.desc]}
+              onChangeText={text => handleOnChangeText(text, 'desc')}
+            /> */}
+
+            <View
+              style={styles.richTextEditorContainer}>
+              <RichEditor
+                scrollEnabled={true}
+                initialContentHTML={desc}
+                ref={richText}
+                onChange={text => handleOnChangeText(text, 'desc')}
+                placeholder="Write your cool note here"
+                androidHardwareAccelerationDisabled={true}
+                style={styles.richTextEditorStyle}
+                initialHeight={250}
+              />
+            </View>
+
+            <RichToolbar
+              editor={richText}
+              selectedIconTint="#873c1e"
+              iconTint="#312921"
+              actions={[
+                actions.insertImage,
+                actions.setBold,
+                actions.setItalic,
+                actions.insertBulletsList,
+                actions.insertOrderedList,
+                actions.insertLink,
+                actions.setStrikethrough,
+                actions.setUnderline,
+              ]}
+              style={styles.richTextToolbarStyle}
+            />
+          </View>
+
           <View style={styles.btnContainer}>
             <RoundIconBtn
               size={15}
@@ -106,11 +149,11 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.PRIMARY,
     fontSize: 20,
     color: colors.DARK,
-    flex: 0.7,
+    flex: 1,
   },
   input: {
-    borderBottomWidth: 2,
-    borderBottomColor: colors.PRIMARY,
+    // borderBottomWidth: 2,
+    // borderBottomColor: colors.PRIMARY,
     fontSize: 20,
     color: colors.DARK,
     flex: 0.3,
@@ -131,6 +174,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     paddingVertical: 15,
+  },
+  richTextContainer: {
+    // fontSize: 20,
+    color: colors.DARK,
+    flex: 1,
+    display: "flex",
+    flexDirection: "column-reverse",
+    // backgroundColor: 'red',
+  },
+  richTextToolbarStyle: {
+    backgroundColor: "#c6c3b3",
+    borderColor: "#c6c3b3",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderWidth: 1,
+  },
+  richTextEditorStyle: {
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderWidth: 1,
+    borderColor: "#ccaf9b",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+    fontSize: 20,
+
+    flex: 1,
+  },
+  richTextEditorContainer: {
+    flex: 1,
   },
 });
 
