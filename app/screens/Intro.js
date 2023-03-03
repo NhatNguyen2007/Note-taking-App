@@ -25,7 +25,7 @@ const Intro = ({ onFinish }) => {
     <View style={styles.container}>
       <StatusBar hidden />
       <View style={styles.content}>
-        <Text style={styles.title}>Welcome to MyNotes</Text>
+        <Text style={styles.title}>Welcome to Noteify</Text>
         <Text style={styles.subtitle}>
           Please enter your name to continue
         </Text>

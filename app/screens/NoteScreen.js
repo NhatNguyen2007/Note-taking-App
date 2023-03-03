@@ -87,14 +87,18 @@ const NoteScreen = ({ user, navigation }) => {
 
   return (
     <>
-      <StatusBar barStyle='dark-content' backgroundColor={colors.LIGHT} />
+      <StatusBar barStyle='dark-content' style={{backgroundColor: '#fff3cd'}} />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-        <Text style={styles.header}>
-          <Text style={styles.greeting}>Good {greet}</Text>
-          <Text style={styles.username}> {user.name}</Text>
-        </Text>
 
+        <View style={styles.headerContainer}>
+          <Text style={styles.header}>
+            <Text style={styles.greeting}>Good {greet}</Text>
+            <Text style={styles.username}> {user.name}</Text>
+          </Text>
+        </View>
+
+        <View style={styles.bodyContainer}>
           {notes.length ? (
             <SearchBar
               value={searchQuery}
@@ -116,7 +120,7 @@ const NoteScreen = ({ user, navigation }) => {
               }}
               keyExtractor={item => item.id.toString()}
               renderItem={({ item }) => (
-                <Note onPress={() => openNote(item)} item={item} />
+                <Note onPress={() => openNote(item)} item={item} numb={Math.floor(Math.random() * 6)}/>
               )}
             />
           )}
@@ -131,6 +135,8 @@ const NoteScreen = ({ user, navigation }) => {
               <Text style={styles.emptyHeader}>Add Notes</Text>
             </View>
           ) : null}
+        </View>
+
         </View>
       </TouchableWithoutFeedback>
       <RoundIconBtn
@@ -153,10 +159,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     textShadowRadius: 3,
-    marginTop: 5,
+    color: '#FF9F00',
   },
   container: {
-    paddingHorizontal: 20,
     flex: 1,
     zIndex: 1,
   },
@@ -175,13 +180,22 @@ const styles = StyleSheet.create({
   addBtn: {
     position: 'absolute',
     right: 15,
-    bottom: 50,
+    bottom: 15,
     zIndex: 1,
   },
   
   username: {
     color: colors.SECONDARY,
     textTransform: 'capitalize',
+  },
+  headerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff3cd',
+    flex: 0.3,
+  },
+  bodyContainer: {
+    paddingHorizontal: 20,
   },
 });
 

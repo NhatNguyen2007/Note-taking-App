@@ -125,11 +125,11 @@ const styles = StyleSheet.create({
 
   container: {
     // flex: 1,
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 30,
-    color: colors.PRIMARY,
+    color: '#FF9F00',
     fontWeight: 'bold',
   },
   desc: {
@@ -144,6 +144,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 15,
     bottom: 50,
+  },
+  body: {
+    backgroundColor: '#fff3cd',
   },
 });
 

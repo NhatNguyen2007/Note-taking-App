@@ -100,7 +100,6 @@ const NoteInputModal = ({ visible, onClose, onSubmit, note, isEdit }) => {
               selectedIconTint="#873c1e"
               iconTint="#312921"
               actions={[
-                actions.insertImage,
                 actions.setBold,
                 actions.setItalic,
                 actions.insertBulletsList,
